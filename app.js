@@ -32,7 +32,8 @@
     var u=new URLSearchParams();if(c.value)u.set('c',c.value);if(q.value)u.set('q',q.value);
     history.replaceState(null,'',location.pathname+(u.toString()?'?'+u:''));
   }
-  q.addEventListener('input',filtra);c.addEventListener('change',filtra);o.addEventListener('change',filtra);
+  q.addEventListener('input',filtra);
+  document.getElementById('fb').addEventListener('submit',function(e){e.preventDefault();filtra();q.blur();lista.scrollIntoView({behavior:'smooth'})});c.addEventListener('change',filtra);o.addEventListener('change',filtra);
   mas.addEventListener('click',function(){pag++;pinta()});
   fetch('productos.json').then(function(r){return r.json()}).then(function(d){todos=d;filtra()});
 })();
