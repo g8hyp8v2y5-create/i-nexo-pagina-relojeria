@@ -1,10 +1,17 @@
 (function(){
   var WA='573219298412';
   function money(v){return '$'+Math.round(v).toLocaleString('es-CO')}
+  // Origen del chat: cada red enlaza con ?o=ig, ?o=fb o ?o=tt y se recuerda mientras dure la visita
+  var REDES={ig:'Instagram',fb:'Facebook',tt:'TikTok'},ori='';
+  try{var po=new URLSearchParams(location.search).get('o');if(REDES[po])sessionStorage.setItem('inexo_o',po);ori=REDES[sessionStorage.getItem('inexo_o')]||''}catch(e){}
+  var vengo=ori?'Vengo de '+ori+'.\n\n':'';
+  if(ori) document.querySelectorAll('a[href^="https://wa.me/"]:not([data-wa])').forEach(function(a){
+    a.href='https://wa.me/'+WA+'?text='+encodeURIComponent('Hola i-Nexo. '+vengo.trim());
+  });
   // El botón de WhatsApp comparte la dirección real desde la que se abrió la página
   document.querySelectorAll('a[data-wa]').forEach(function(a){
     var d=a.getAttribute('data-wa').split('|');
-    var msg='Hola i-Nexo.\n\nEstoy interesado/a en este reloj, ¿está disponible?\n\nProducto: '+d[0]+'\nPrecio: '+d[1]+' COP\nLink: '+location.origin+location.pathname;
+    var msg='Hola i-Nexo.\n\n'+vengo+'Estoy interesado/a en este reloj, ¿está disponible?\n\nProducto: '+d[0]+'\nPrecio: '+d[1]+' COP\nLink: '+location.origin+location.pathname;
     a.href='https://wa.me/'+WA+'?text='+encodeURIComponent(msg);
   });
   var lista=document.getElementById('lista'); if(!lista) return;
