@@ -1,5 +1,5 @@
 (function(){
-  var WA='573219298412';
+  var WA='573189486875';
   function money(v){return '$'+Math.round(v).toLocaleString('es-CO')}
   // Origen del chat: cada red enlaza con ?o=ig, ?o=fb o ?o=tt y se recuerda mientras dure la visita
   var REDES={ig:'Instagram',fb:'Facebook',tt:'TikTok'},ori='';
